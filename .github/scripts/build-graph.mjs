@@ -48,7 +48,7 @@ const query = `query($login: String!) {
     contributionsCollection {
       contributionCalendar {
         totalContributions
-        weeks(first: 53) {
+        weeks {
           contributionDays {
             contributionCount
             weekday
