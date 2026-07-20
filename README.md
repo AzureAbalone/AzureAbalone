@@ -211,7 +211,7 @@ GitHub Actions → Docker → Woodpecker → VPS rollout path.
 <!-- STATS: hardcoded snapshot for first render; auto-updated daily by .github/workflows/contrib.yml -->
 <div align="center">
 
-| `<div class="stat-num" data-stat="last-year-contribs">937</div>` | `<div class="stat-num" data-stat="commits-in-july-2026">75</div>` | `<div class="stat-num" data-stat="active-repositories">N/A</div>` | `<div class="stat-num" data-stat="pull-requests-merged">N/A</div>` |
+| `<div class="stat-num" data-stat="last-year-contribs">324</div>` | `<div class="stat-num" data-stat="commits-in-july-2026">312</div>` | `<div class="stat-num" data-stat="active-repositories">7</div>` | `<div class="stat-num" data-stat="pull-requests-merged">3</div>` |
 |:---:|:---:|:---:|:---:|
 | **contributions** last year | **commits** July 2026 | **active** repositories | **PRs** merged |
 
