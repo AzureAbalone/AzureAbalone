@@ -35,9 +35,9 @@ jobs:
             const cc = res.user.contributionsCollection;
             const fmt = (n) => String(n).toLocaleString('en-US');
 
-            // Placeholders MUST exist in index.html, e.g. <div class="stat-num" data-stat="commits-in-july-2026">75</div>
+            // Placeholders MUST exist in README.md, e.g. <div class="stat-num" data-stat="commits-in-july-2026">0</div>
             const fs = require('fs');
-            const tpl = fs.readFileSync('index.html', 'utf8');
+            const tpl = fs.readFileSync('README.md', 'utf8');
             const patches = {
               'last-year-contribs': fmt(cc.contributionCalendar.totalContributions),
               'commits-in-july-2026': fmt(cc.totalCommitContributions),
@@ -45,26 +45,25 @@ jobs:
               'pull-requests-merged': fmt(res.user.pullRequests.totalCount),
             };
 
-            let html = tpl;
+            let md = tpl;
             let changed = false;
             for (const [key, value] of Object.entries(patches)) {
-              const re = new RegExp(`(<div class="stat-num" data-stat="${key}">)([\\d,]+)(</div>)`);
-              const next = html.replace(re, (_m, a, _b, c) => a + value + c);
-              if (next !== html) { changed = true; html = next; }
+              // match either numeric placeholder (e.g. 937) or N/A — first run may have any
+              const re = new RegExp(`(<div class="stat-num" data-stat="${key}">)([^<]+)(</div>)`);
+              const next = md.replace(re, (_m, a, _b, c) => a + value + c);
+              if (next !== md) { changed = true; md = next; }
             }
             if (!changed) {
               core.notice('no stat values changed; skip commit');
               return;
             }
-            fs.writeFileSync('index.html', html);
+            fs.writeFileSync('README.md', md);
 
       - name: commit and push
         run: |
           git config user.name "azure-abalone-bot"
           git config user.email "azure-abalone-bot@users.noreply.github.com"
-          git add index.html
+          git add README.md
           git diff --cached --quiet && { echo "no diff"; exit 0; }
-          git commit -m "ci(contrib): refresh stats via GraphQL
-
-auto-refresh by .github/workflows/contrib.yml"
+          git commit -m "ci(contrib): refresh stats via GraphQL (auto-refresh by .github/workflows/contrib.yml)"
           git push
