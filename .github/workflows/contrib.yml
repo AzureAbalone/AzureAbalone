@@ -85,7 +85,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_LOGIN: AzureAbalone
-        run: node .github/scripts/build-graph.mjs
+        run: |
+          set -x
+          node .github/scripts/build-graph.mjs 2>&1 | tee build-graph.log
+          echo "tee exit=${PIPESTATUS[0]}"
+          cat build-graph.log
+
+      - name: upload build-graph log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-graph-log
+          path: build-graph.log
+          if-no-files-found: ignore
+          retention-days: 90
 
       - name: commit and push
         run: |
