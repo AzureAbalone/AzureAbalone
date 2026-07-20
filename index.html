@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AzureAbalone / SE Intern. Backend + DevOps. Hanoi, VN.</title>
+  <title>AzureAbalone / profile.preview</title>
   <style>
     /* ============================================================
      DESIGN READ: brutalist-terminal for technical recruiter scan
@@ -68,7 +68,6 @@
       --mute: #6b6862;
       --rule: #1a1a1a;
       --acid: #39ff14;
-      --bar: #39ff14;
       --pad: 24px;
     }
 
@@ -488,86 +487,6 @@
     }
 
     /* ============== CONTRIBUTION — real graph embed ============== */
-    /* CONTRIB: stats row + top-repos block, brutalist-terminal style */
-    .contrib .contrib-stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--ink);
-      border: 1px solid #2a2a2a;
-      margin-bottom: 18px;
-    }
-
-    .contrib .stat-tile {
-      background: var(--ink);
-      color: var(--paper);
-      padding: 16px 14px;
-    }
-
-    .contrib .stat-tile .stat-num {
-      font-family: var(--mono);
-      font-weight: 700;
-      font-size: 28px;
-      line-height: 1;
-      color: var(--acid);
-      letter-spacing: -0.02em;
-    }
-
-    .contrib .stat-tile .stat-label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--mute);
-      margin-top: 6px;
-      line-height: 1.4;
-    }
-
-    .contrib .contrib-toprepos {
-      border: 1px solid #2a2a2a;
-      margin-bottom: 18px;
-      font-family: var(--mono);
-      font-size: 11px;
-    }
-
-    .contrib .toprepos-line {
-      display: grid;
-      grid-template-columns: 32px 1fr 56px 100px;
-      gap: 12px;
-      align-items: center;
-      padding: 8px 14px;
-      border-bottom: 1px solid #2a2a2a;
-      color: var(--paper);
-    }
-
-    .contrib .toprepos-line:last-child {
-      border-bottom: none;
-    }
-
-    .contrib .toprepos-line .rank {
-      color: var(--mute);
-      font-weight: 700;
-    }
-
-    .contrib .toprepos-line .repo-name {
-      color: var(--paper);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .contrib .toprepos-line .commits {
-      color: var(--acid);
-      text-align: right;
-      font-weight: 700;
-    }
-
-    .contrib .toprepos-line .bar {
-      height: 4px;
-      background: var(--bar);
-      width: var(--w);
-      display: block;
-    }
-
     .contrib {
       background: var(--ink);
       color: var(--paper);
@@ -682,7 +601,7 @@
         <span class="dots"><span></span><span></span><span></span></span>
         <span class="path">~/github/<strong>AzureAbalone</strong>/README.md</span>
       </div>
-      <span>AZUREABALONE.md :: RENDER</span>
+      <span>PROFILE.PREVIEW :: STATIC :: RENDER</span>
     </div>
 
     <div class="titlebar">
@@ -849,56 +768,14 @@
       </div>
     </section>
 
-    <!-- CONTRIBUTION: stats cards + activity graph, both fetch real data via GitHub Action -->
+    <!-- CONTRIBUTION: real graph embedded from ghchart.rshah.org (layout family 4) -->
     <section class="contrib">
       <div class="label">// contribution.activity</div>
-
-      <!-- STATS ROW: hardcoded snapshot for first render; auto-updated daily by .github/workflows/contrib.yml -->
-      <div class="contrib-stats" aria-label="GitHub contribution summary">
-        <div class="stat-tile">
-          <div class="stat-num" data-stat="last-year-contribs">937</div>
-          <div class="stat-label">contributions in the last year</div>
-        </div>
-        <div class="stat-tile">
-          <div class="stat-num" data-stat="commits-in-july-2026">75</div>
-          <div class="stat-label">commits in July 2026</div>
-        </div>
-        <div class="stat-tile">
-          <div class="stat-num" data-stat="active-repositories">N/A</div>
-          <div class="stat-label">active repositories</div>
-        </div>
-        <div class="stat-tile">
-          <div class="stat-num" data-stat="pull-requests-merged">N/A</div>
-          <div class="stat-label">pull requests merged</div>
-        </div>
-      </div>
-
-      <!-- TOP REPOS BY COMMITS: rendered as a stripped-text block, brutalist-terminal style -->
-      <div class="contrib-toprepos">
-        <div class="toprepos-line"><span class="rank">01</span><span
-            class="repo-name">hoangtrieu123/Knowledge-Center-BE</span><span class="commits">68</span><span class="bar"
-            style="--w:100%"></span></div>
-        <div class="toprepos-line"><span class="rank">02</span><span class="repo-name">AzureAbalone/Telebot</span><span
-            class="commits">7</span><span class="bar" style="--w:10%"></span></div>
-        <div class="toprepos-line"><span class="rank">03</span><span
-            class="repo-name">hoangtrieu123/knowledge-center-fe</span><span class="commits">5</span><span class="bar"
-            style="--w:7%"></span></div>
-        <div class="toprepos-line"><span class="rank">04</span><span class="repo-name">azure-abalone/pkg-mng</span><span
-            class="commits">4</span><span class="bar" style="--w:6%"></span></div>
-        <div class="toprepos-line"><span class="rank">05</span><span class="repo-name">hoangtrieu123/aic-svc</span><span
-            class="commits">3</span><span class="bar" style="--w:4%"></span></div>
-      </div>
-
-      <!-- GRAPH: github-readme-activity-graph.vercel.app, theme matched to brutalist slab -->
       <div class="graph-frame">
-        <img
-          src="https://github-readme-activity-graph.vercel.app/graph?username=AzureAbalone&theme=github-dark&area=true&hide_border=true&radius=0&custom_title=AzureAbalone+%2F+yearly+contribution+activity"
-          alt="GitHub yearly contribution activity graph for @AzureAbalone" />
+        <img src="https://github-readme-activity-graph.vercel.app/graph?username=AzureAbalone&theme=github-dark&area=true&hide_border=true&radius=0" alt="GitHub contribution graph for @AzureAbalone" />
       </div>
       <div class="fallback">
-        Stats auto-refreshed daily via <code>.github/workflows/contrib.yml</code> · graph via
-        <a href="https://github.com/2003scott/github-readme-activity-graph" target="_blank"
-          rel="noopener">github-readme-activity-graph</a>
+        Source: <a href="https://github-readme-activity-graph.vercel.app" target="_blank" rel="noopener">github-readme-activity-graph.vercel.app</a> · theme=github-dark · area=true
       </div>
     </section>
 
