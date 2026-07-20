@@ -7,7 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  refresh:
+  # Patch stat numbers in README.md (kept from original workflow)
+  patch-stats:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -35,7 +36,6 @@ jobs:
             const cc = res.user.contributionsCollection;
             const fmt = (n) => String(n).toLocaleString('en-US');
 
-            // Placeholders MUST exist in README.md, e.g. <div class="stat-num" data-stat="commits-in-july-2026">0</div>
             const fs = require('fs');
             const tpl = fs.readFileSync('README.md', 'utf8');
             const patches = {
@@ -48,7 +48,6 @@ jobs:
             let md = tpl;
             let changed = false;
             for (const [key, value] of Object.entries(patches)) {
-              // match either numeric placeholder (e.g. 937) or N/A — first run may have any
               const re = new RegExp(`(<div class="stat-num" data-stat="${key}">)([^<]+)(</div>)`);
               const next = md.replace(re, (_m, a, _b, c) => a + value + c);
               if (next !== md) { changed = true; md = next; }
@@ -66,4 +65,33 @@ jobs:
           git add README.md
           git diff --cached --quiet && { echo "no diff"; exit 0; }
           git commit -m "ci(contrib): refresh stats via GraphQL (auto-refresh by .github/workflows/contrib.yml)"
+          git push
+
+  # Render brutalist mono SVG graph into index.html for Pages site
+  render-graph:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: setup node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: render brutalist contribution graph into index.html
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_LOGIN: AzureAbalone
+        run: node .github/scripts/build-graph.mjs
+
+      - name: commit and push
+        run: |
+          git config user.name "azure-abalone-bot"
+          git config user.email "azure-abalone-bot@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && { echo "no diff"; exit 0; }
+          git commit -m "ci(pages): render brutalist mono contribution graph (auto by .github/workflows/contrib.yml)"
           git push
