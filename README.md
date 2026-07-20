@@ -139,6 +139,7 @@ SVG <foreignObject>; for raw README viewing, monospace fallback applies).
 <td width="50%" valign="top">
 
 ### `ragagent` — KMS + LMS + AI Chatbot
+
 Spring Boot + Postgres + RAG embeddings. CI/CD via GitHub Actions → Coolify.
 Multi-tenant document store, exam module, AI tutor. Built solo + 1 dev.
 
@@ -148,6 +149,7 @@ Multi-tenant document store, exam module, AI tutor. Built solo + 1 dev.
 <td width="50%" valign="top">
 
 ### `ops-notes` — Self-hosted Online Exam
+
 Spring Boot exam platform. Cloudflare Turnstile + Altcha anti-bot.
 GitHub Actions → Coolify on every push. R2 for static assets.
 Full lifecycle with one other dev.
@@ -160,6 +162,7 @@ Full lifecycle with one other dev.
 <td width="50%" valign="top">
 
 ### `rag-chatbot-demo` — Personal RAG
+
 Embeddings + retrieval + Spring Boot backend. Mirrors the Traphaco
 proxy pattern at home. End-to-end demo pipeline.
 
@@ -169,6 +172,7 @@ proxy pattern at home. End-to-end demo pipeline.
 <td width="50%" valign="top">
 
 ### `trafup-anti-bot` — Anti-automation Defense
+
 Cloudflare Turnstile + Altcha proof-of-work + behavioral analytics.
 Multi-layer visible challenge for trafup.com.
 
@@ -180,6 +184,7 @@ Multi-layer visible challenge for trafup.com.
 <td width="50%" valign="top">
 
 ### `ops-notes` — DevOps Notebook
+
 Coolify, Docker Compose patterns, Woodpecker CI snippets,
 Nginx reverse-proxy, Cloudflare + TLS recipes.
 
@@ -189,6 +194,7 @@ Nginx reverse-proxy, Cloudflare + TLS recipes.
 <td width="50%" valign="top">
 
 ### `url-shortener-cicd` — CI/CD Practice
+
 Compact shortener built to exercise the full
 GitHub Actions → Docker → Woodpecker → VPS rollout path.
 
@@ -217,11 +223,13 @@ GitHub Actions → Docker → Woodpecker → VPS rollout path.
 ```
 
 ```
+
 01  hoangtrieu123/Knowledge-Center-BE    68  ████████████████████ 100%
 02  AzureAbalone/Telebot                  7  ██                      10%
 03  hoangtrieu123/knowledge-center-fe     5  █                       7%
 04  azure-abalone/pkg-mng                 4  █                       6%
 05  hoangtrieu123/aic-svc                 3  █                       4%
+
 ```
 
 ```
