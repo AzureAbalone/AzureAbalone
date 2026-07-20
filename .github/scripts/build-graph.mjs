@@ -80,12 +80,16 @@ async function fetchContribs() {
   }
   const json = await res.json();
   if (json.errors) {
-    console.warn(`[build-graph] GraphQL errors: ${JSON.stringify(json.errors)}; using stub.`);
+    console.warn(`[build-graph] GraphQL errors: ${JSON.stringify(json.errors).slice(0, 400)}; using stub.`);
     return null;
   }
   const cc = json?.data?.user?.contributionsCollection;
   if (!cc) {
-    console.warn("[build-graph] empty contributionCollection; using stub.");
+    console.warn(`[build-graph] empty contributionCollection; payload=${JSON.stringify(json).slice(0, 400)}; using stub.`);
+    return null;
+  }
+  if (!cc.contributionCalendar) {
+    console.warn(`[build-graph] no contributionCalendar inside cc; cc keys=${Object.keys(cc)}; using stub.`);
     return null;
   }
   return cc.contributionCalendar;
