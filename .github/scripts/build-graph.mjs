@@ -25,7 +25,7 @@ const ROOT = resolve(process.cwd());
 const INDEX = resolve(ROOT, "index.html");
 const MARKER_START = "<!--CONTRIB_GRAPH:START-->";
 const MARKER_END = "<!--CONTRIB_GRAPH:END-->";
-const WEEKS = 26;          // 26 tuần ~ 6 tháng gần nhất
+const WEEKS = 53;          // 53 tuần ~ 1 năm gần nhất (full year coverage)
 const CELL = 11;           // px
 const GAP = 2;             // px
 const PAD_X = 4;
@@ -135,13 +135,13 @@ function buildSvg(calendar) {
   }
 
   const total = calendar.totalContributions ?? slice.reduce((s, d) => s + d.contributionCount, 0);
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="26-week contribution graph, ${total} contributions" class="contrib-svg"><g>${cells.join("")}</g></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="${h}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${WEEKS}-week contribution graph, ${total} contributions" class="contrib-svg"><g>${cells.join("")}</g></svg>`;
 }
 
 function svgStub(reason) {
   const w = PAD_X * 2 + WEEKS * CELL + (WEEKS - 1) * GAP;
   const h = PAD_Y * 2 + 7 * CELL + 6 * GAP;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="contribution graph unavailable" class="contrib-svg"><g>${`<rect x="${PAD_X}" y="${PAD_Y}" width="${w - PAD_X * 2}" height="${h - PAD_Y * 2}" fill="none" stroke="${STROKE}" stroke-dasharray="2 2"/><text x="${w / 2}" y="${h / 2}" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace,monospace" font-size="9" fill="#1a1a1a">graph unavailable :: ${escapeXml(reason)}</text>`}</g></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="${h}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="contribution graph unavailable" class="contrib-svg"><g>${`<rect x="${PAD_X}" y="${PAD_Y}" width="${w - PAD_X * 2}" height="${h - PAD_Y * 2}" fill="none" stroke="${STROKE}" stroke-dasharray="2 2"/><text x="${w / 2}" y="${h / 2}" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace,monospace" font-size="9" fill="#1a1a1a">graph unavailable :: ${escapeXml(reason)}</text>`}</g></svg>`;
 }
 
 function escapeXml(s) {
@@ -168,7 +168,9 @@ const before = html.slice(0, startIdx + MARKER_START.length);
 const after = html.slice(endIdx);
 const calendar = await fetchContribs();
 const svg = buildSvg(calendar);
-const fallbackLink = `<p class="contrib-fallback">graph generated ${new Date().toISOString().slice(0, 10)} :: ${calendar ? "live" : "stub"} :: <a href="https://github.com/${login}" target="_blank" rel="noopener">@${login} on GitHub</a></p>`;
+const fallbackLink = calendar
+  ? ""
+  : `<p class="contrib-fallback">graph generated ${new Date().toISOString().slice(0, 10)} :: stub :: <a href="https://github.com/${login}" target="_blank" rel="noopener">@${login} on GitHub</a></p>`;
 const replacement = `\n      <div class="graph-frame">${svg}</div>\n      ${fallbackLink}\n      `;
 const next = `${before}${replacement}${after}`;
 writeFileSync(INDEX, next);
